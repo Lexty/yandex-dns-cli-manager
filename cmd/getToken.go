@@ -18,18 +18,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main
+package cmd
 
 import (
 	"fmt"
-	"os"
 
-	"github.com/Lexty/yandexdns/cmd"
+	"github.com/spf13/cobra"
 )
 
-func main() {
-	if err := cmd.RootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(-1)
-	}
+// getTokenCmd represents the getToken command
+var getTokenCmd = &cobra.Command{
+	Use:   "get-token",
+	Short: "Instruction for getting token",
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Printf(`Visit
+https://tech.yandex.ru/pdd/doc/concepts/access-docpage/#access-admin
+Follow the instructions.
+`)
+	},
+}
+
+func init() {
+	RootCmd.AddCommand(getTokenCmd)
 }

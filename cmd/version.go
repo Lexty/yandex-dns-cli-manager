@@ -18,18 +18,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-package main
+package cmd
 
 import (
 	"fmt"
-	"os"
 
-	"github.com/Lexty/yandexdns/cmd"
+	"github.com/spf13/cobra"
 )
 
-func main() {
-	if err := cmd.RootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(-1)
-	}
+// versionCmd represents the version command
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Print the version of YandexDns",
+	Long:  `All software has versions. This is YandexDns's.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Yandex Dns CLI Manager v0.1 -- HEAD")
+	},
+}
+
+func init() {
+	RootCmd.AddCommand(versionCmd)
 }
