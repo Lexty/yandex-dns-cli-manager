@@ -1,7 +1,7 @@
 default: build
 
 build: imports vet
-	go build -v -o ./yandex-dns .
+	go build -v -o ./yandexdns .
 
 doc:
 	godoc -http=:6060 -index
@@ -20,7 +20,7 @@ lint:
 	golint ./src
 
 run: build
-	./yandex-dns
+	./yandexdns
 
 test:
 	go test ./
