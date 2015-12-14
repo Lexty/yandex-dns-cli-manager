@@ -35,13 +35,7 @@ import (
 // addCmd represents the add command
 var addCmd = &cobra.Command{
 	Use:   "add",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Add a new DNS record",
 	Run: func(cmd *cobra.Command, args []string) {
 		rec := api.Record{}
 
@@ -78,7 +72,7 @@ func init() {
 	RootCmd.AddCommand(addCmd)
 
 	addCmd.Flags().StringP("format", "f", "", fmt.Sprintf("format output (%s|%s)", formatList, formatJson))
-	viper.BindPFlag("format", listCmd.Flags().Lookup("format"))
+	viper.BindPFlag("format", addCmd.Flags().Lookup("format"))
 	viper.SetDefault("format", formatList)
 
 	addCmd.Flags().StringP("type", "t", "", fmt.Sprintf("Type of record (available: %s)", strings.Join([]string{typeA, typeAAAA, typeCNAME, typeSRV, typeTXT, typeSOA, typeMX, typeNS}, ", ")))
@@ -107,5 +101,4 @@ func init() {
 
 	addCmd.Flags().IntP("ttl", "l", 0, "The lifetime of the DNS record in seconds")
 	viper.BindPFlag("ttl", addCmd.Flags().Lookup("ttl"))
-
 }

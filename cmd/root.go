@@ -64,10 +64,10 @@ func init() {
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/"+cfgFileName+"."+cfgFileType+")")
 
 	RootCmd.PersistentFlags().StringP("admin-token", "a", "", "admin's token")
-	viper.BindPFlag("admin-token", listCmd.Flags().Lookup("admin-token"))
+	viper.BindPFlag("admin-token", RootCmd.Flags().Lookup("admin-token"))
 
 	RootCmd.PersistentFlags().StringP("domain", "d", "", "domain name")
-	viper.BindPFlag("domain", listCmd.Flags().Lookup("domain"))
+	viper.BindPFlag("domain", RootCmd.Flags().Lookup("domain"))
 
 	//	RootCmd.PersistentFlags().StringVarP(&Token, "token", "t", "", "your token")
 	//	RootCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", "domain name")
