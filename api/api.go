@@ -50,8 +50,8 @@ type Record struct {
 	Domain     string      `json:"domain"`
 	Content    string      `json:"content"`
 	Ttl        int         `json:"ttl"`
-	Minttl     int         `json:"minttl"`
-	Fqdn       string      `json:"fqdn"`
+	MinTTL     int         `json:"minttl"`
+	FQDN       string      `json:"fqdn"`
 	Priority   interface{} `json:"priority, string"` // Required only for SRV or MX records
 	Subdomain  string      `json:"subdomain"`
 	Weight     int         `json:"weight"`     // Required only for SRV records
@@ -166,7 +166,7 @@ func copyRecordParams(dst, src *Record) {
 	dst.RecordType = src.RecordType
 	dst.Domain = src.Domain
 	dst.Subdomain = src.Subdomain
-	dst.Fqdn = src.Fqdn
+	dst.FQDN = src.FQDN
 	dst.Content = src.Content
 	dst.Ttl = src.Ttl
 	dst.Priority = src.Priority

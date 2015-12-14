@@ -36,13 +36,14 @@ import (
 
 var newAdminToken string
 var newDomain string
+var newProps string
 
 // settingsCmd represents the settings command
 var settingsCmd = &cobra.Command{
 	Use:   "settings",
 	Short: "Show or change settings",
 	Run: func(cmd *cobra.Command, args []string) {
-		if "" == newAdminToken && "" == newDomain {
+		if "" == newAdminToken && "" == newDomain && "" == newProps {
 			printSettings()
 		} else {
 			saveSettings()
@@ -51,10 +52,16 @@ var settingsCmd = &cobra.Command{
 }
 
 func printSettings() {
+	props := viper.GetString("props")
+	if props == "" {
+		props = propsDefault
+	}
+
 	fmt.Printf(`Settings:
 	admin-token %s
 	domain      %s
-`, viper.GetString("admin-token"), viper.GetString("domain"))
+	props       %s
+`, viper.GetString("admin-token"), viper.GetString("domain"), props)
 }
 
 func saveSettings() {
@@ -71,6 +78,9 @@ func saveSettings() {
 	}
 	if newDomain != "" {
 		lines = append(lines, `    "domain": "`+newDomain+`"`)
+	}
+	if newProps != "" {
+		lines = append(lines, `    "props": "`+newProps+`"`)
 	}
 
 	fmt.Println(newAdminToken)
@@ -99,4 +109,5 @@ func init() {
 	RootCmd.AddCommand(settingsCmd)
 	settingsCmd.Flags().StringVarP(&newAdminToken, "admin-token", "a", "", "set your admin token")
 	settingsCmd.Flags().StringVarP(&newDomain, "domain", "d", "", "set domain name")
+	settingsCmd.Flags().StringVarP(&newProps, "props", "p", "", "set default output record properties")
 }
