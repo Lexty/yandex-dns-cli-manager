@@ -32,7 +32,7 @@ var versionCmd = &cobra.Command{
 	Short: "Print the version of YandexDns",
 	Long:  `All software has versions. This is YandexDns's.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Yandex Dns CLI Manager v0.1 -- HEAD")
+		fmt.Println("Yandex Dns CLI Manager v0.1")
 	},
 }
 
