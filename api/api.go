@@ -49,7 +49,7 @@ type Record struct {
 	RecordType string      `json:"type"`
 	Domain     string      `json:"domain"`
 	Content    string      `json:"content"`
-	Ttl        int         `json:"ttl"`
+	TTL        int         `json:"ttl"`
 	MinTTL     int         `json:"minttl"`
 	FQDN       string      `json:"fqdn"`
 	Priority   interface{} `json:"priority, string"` // Required only for SRV or MX records
@@ -125,8 +125,8 @@ func recordToQueryString(r Record) string {
 	if "" != r.Content {
 		query = append(query, "content="+r.Content)
 	}
-	if 0 != r.Ttl {
-		query = append(query, "ttl="+strconv.Itoa(r.Ttl))
+	if 0 != r.TTL {
+		query = append(query, "ttl="+strconv.Itoa(r.TTL))
 	}
 	if "" != r.AdminMail {
 		query = append(query, "admin_mail="+r.AdminMail)
@@ -168,7 +168,7 @@ func copyRecordParams(dst, src *Record) {
 	dst.Subdomain = src.Subdomain
 	dst.FQDN = src.FQDN
 	dst.Content = src.Content
-	dst.Ttl = src.Ttl
+	dst.TTL = src.TTL
 	dst.Priority = src.Priority
 }
 

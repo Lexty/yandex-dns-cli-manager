@@ -62,6 +62,13 @@ func init() {
 	// will be global for your application.
 
 	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/"+cfgFileName+"."+cfgFileType+")")
+
+	RootCmd.PersistentFlags().StringP("admin-token", "a", "", "admin's token")
+	viper.BindPFlag("admin-token", listCmd.Flags().Lookup("admin-token"))
+
+	RootCmd.PersistentFlags().StringP("domain", "d", "", "domain name")
+	viper.BindPFlag("domain", listCmd.Flags().Lookup("domain"))
+
 	//	RootCmd.PersistentFlags().StringVarP(&Token, "token", "t", "", "your token")
 	//	RootCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "", "domain name")
 	// Cobra also supports local flags, which will only run

@@ -236,7 +236,7 @@ func getValue(prop string, r *api.Record) (string, error) {
 	case propContent:
 		val = r.Content
 	case propTTL:
-		val = strconv.Itoa(r.Ttl)
+		val = strconv.Itoa(r.TTL)
 	case propPriority:
 		val = fmt.Sprintf("%v", r.Priority)
 	case propFQDN:
@@ -259,12 +259,6 @@ func getValue(prop string, r *api.Record) (string, error) {
 
 func init() {
 	RootCmd.AddCommand(listCmd)
-
-	listCmd.Flags().StringP("admin-token", "a", "", "admin's token")
-	viper.BindPFlag("admin-token", listCmd.Flags().Lookup("admin-token"))
-
-	listCmd.Flags().StringP("domain", "d", "", "domain name")
-	viper.BindPFlag("domain", listCmd.Flags().Lookup("domain"))
 
 	listCmd.Flags().StringP("format", "f", "", fmt.Sprintf("format output (%s|%s|%s)", formatList, formatTable, formatJson))
 	viper.BindPFlag("format", listCmd.Flags().Lookup("format"))
