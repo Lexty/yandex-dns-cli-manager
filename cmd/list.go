@@ -75,7 +75,7 @@ var props map[string]string
 
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "The list of records in the domain zone",
+	Short: "The list of the DNS records",
 	Run: func(cmd *cobra.Command, args []string) {
 		if !viper.IsSet("admin-token") {
 			fmt.Println("Error: --admin-token is not set")
