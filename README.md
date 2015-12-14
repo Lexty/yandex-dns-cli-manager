@@ -8,10 +8,10 @@ Usage:
 
 Available Commands:
   add         Add a new DNS record
-  delete      Delete the DNS record by ID
+  delete      Delete DNS record by ID
   edit        Edit DNS record
   get-token   Instruction for getting token
-  list        The list of the DNS records
+  list        The list of DNS records
   settings    Show or change settings
   version     Print the version of YandexDns
 
@@ -23,3 +23,7 @@ Flags:
 
 Use "yandexdns [command] --help" for more information about a command.
 ```
+
+### License
+
+MIT

@@ -75,30 +75,30 @@ func init() {
 	viper.BindPFlag("format", addCmd.Flags().Lookup("format"))
 	viper.SetDefault("format", formatList)
 
-	addCmd.Flags().StringP("type", "t", "", fmt.Sprintf("Type of record (available: %s)", strings.Join([]string{typeA, typeAAAA, typeCNAME, typeSRV, typeTXT, typeSOA, typeMX, typeNS}, ", ")))
+	addCmd.Flags().StringP("type", "t", "", fmt.Sprintf("type of record (available: %s)", strings.Join([]string{typeA, typeAAAA, typeCNAME, typeSRV, typeTXT, typeSOA, typeMX, typeNS}, ", ")))
 	viper.BindPFlag("type", addCmd.Flags().Lookup("type"))
 
-	addCmd.Flags().StringP("admin-mail", "m", "", "Email-address of the domain's administrator")
+	addCmd.Flags().StringP("admin-mail", "m", "", "email-address of the domain's administrator")
 	viper.BindPFlag("admin-mail", addCmd.Flags().Lookup("admin-mail"))
 
-	addCmd.Flags().StringP("content", "c", "", "Content of the DNS record")
+	addCmd.Flags().StringP("content", "c", "", "content of the DNS record")
 	viper.BindPFlag("content", addCmd.Flags().Lookup("content"))
 
-	addCmd.Flags().StringP("priority", "p", "", "Priority of the DNS record")
+	addCmd.Flags().StringP("priority", "p", "", "riority of the DNS record")
 	viper.BindPFlag("priority", addCmd.Flags().Lookup("priority"))
 
-	addCmd.Flags().IntP("weight", "w", 0, "Weight of the SRV-record relative to other SRV-records for the same domain with the same priority")
+	addCmd.Flags().IntP("weight", "w", 0, "weight of the SRV-record relative to other SRV-records for the same domain with the same priority")
 	viper.BindPFlag("weight", addCmd.Flags().Lookup("weight"))
 
 	addCmd.Flags().StringP("port", "P", "", "TCP or UDP port of the host that is hosting the service")
 	viper.BindPFlag("port", addCmd.Flags().Lookup("port"))
 
-	addCmd.Flags().StringP("target", "T", "", "The canonical name of the host providing the service")
+	addCmd.Flags().StringP("target", "T", "", "the canonical name of the host providing the service")
 	viper.BindPFlag("target", addCmd.Flags().Lookup("target"))
 
 	addCmd.Flags().StringP("subdomain", "s", "", "Name of the subdomain")
 	viper.BindPFlag("subdomain", addCmd.Flags().Lookup("subdomain"))
 
-	addCmd.Flags().IntP("ttl", "l", 0, "The lifetime of the DNS record in seconds")
+	addCmd.Flags().IntP("ttl", "l", 0, "the lifetime of the DNS record in seconds")
 	viper.BindPFlag("ttl", addCmd.Flags().Lookup("ttl"))
 }

@@ -82,28 +82,28 @@ func init() {
 	editCmd.Flags().IntP("id", "i", 0, "ID of the record")
 	viper.BindPFlag("id", editCmd.Flags().Lookup("id"))
 
-	editCmd.Flags().StringP("admin-mail", "m", "", "Email-address of the domain's administrator")
+	editCmd.Flags().StringP("admin-mail", "m", "", "email-address of the domain's administrator")
 	viper.BindPFlag("admin-mail", editCmd.Flags().Lookup("admin-mail"))
 
-	editCmd.Flags().StringP("content", "c", "", "Content of the DNS record")
+	editCmd.Flags().StringP("content", "c", "", "content of the DNS record")
 	viper.BindPFlag("content", editCmd.Flags().Lookup("content"))
 
-	editCmd.Flags().StringP("priority", "p", "", "Priority of the DNS record")
+	editCmd.Flags().StringP("priority", "p", "", "priority of the DNS record")
 	viper.BindPFlag("priority", editCmd.Flags().Lookup("priority"))
 
-	editCmd.Flags().IntP("weight", "w", 0, "Weight of the SRV-record relative to other SRV-records for the same domain with the same priority")
+	editCmd.Flags().IntP("weight", "w", 0, "weight of the SRV-record relative to other SRV-records for the same domain with the same priority")
 	viper.BindPFlag("weight", editCmd.Flags().Lookup("weight"))
 
 	editCmd.Flags().StringP("port", "P", "", "TCP or UDP port of the host that is hosting the service")
 	viper.BindPFlag("port", editCmd.Flags().Lookup("port"))
 
-	editCmd.Flags().StringP("target", "T", "", "The canonical name of the host providing the service")
+	editCmd.Flags().StringP("target", "T", "", "the canonical name of the host providing the service")
 	viper.BindPFlag("target", editCmd.Flags().Lookup("target"))
 
-	editCmd.Flags().StringP("subdomain", "s", "", "Name of the subdomain")
+	editCmd.Flags().StringP("subdomain", "s", "", "name of the subdomain")
 	viper.BindPFlag("subdomain", editCmd.Flags().Lookup("subdomain"))
 
-	editCmd.Flags().IntP("ttl", "l", 0, "The lifetime of the DNS record in seconds")
+	editCmd.Flags().IntP("ttl", "l", 0, "the lifetime of the DNS record in seconds")
 	viper.BindPFlag("ttl", editCmd.Flags().Lookup("ttl"))
 
 	editCmd.Flags().IntP("refresh", "r", 0, "time between updates")
