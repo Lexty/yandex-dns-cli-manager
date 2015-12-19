@@ -24,7 +24,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Lexty/yandexdns/cmd"
+	"github.com/Lexty/yandex-dns-cli-manager/cmd"
 )
 
 func main() {
