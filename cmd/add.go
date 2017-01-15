@@ -27,7 +27,7 @@ import (
 
 	"errors"
 
-	"github.com/Lexty/yandex-dns-cli-manager/api"
+	"github.com/lexty/yandex-dns-cli-manager/api"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
