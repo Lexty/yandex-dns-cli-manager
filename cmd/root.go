@@ -39,7 +39,7 @@ var Domain string
 
 // This represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "yandexdns",
+	Use:   "yandex-dns-cli-manager",
 	Short: "Yandex DNS CLI manager",
 	Long:  `Yandex DNS CLI manager allows you to change the DNS settings of your domain on pdd.yandex.ru`,
 	//	Run: func(cmd *cobra.Command, args []string) { },
