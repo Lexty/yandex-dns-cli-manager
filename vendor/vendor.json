@@ -1,0 +1,25 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "TlmrzF0GHYM24t0VB+1Vcuj8ZNE=",
+			"path": "github.com/olekukonko/tablewriter",
+			"revision": "333c0610de3426f738e7ec63801cfd1883b0aeb4",
+			"revisionTime": "2015-11-24T13:52:13Z"
+		},
+		{
+			"checksumSHA1": "DM2Znk91oP4QCo6PQEzTO/ob3Hc=",
+			"path": "github.com/spf13/cobra",
+			"revision": "29cddf65b2e18b9c2339f8b659f38fbefe8b98ea",
+			"revisionTime": "2015-12-09T13:50:41Z"
+		},
+		{
+			"checksumSHA1": "67J04WlcpfPjRx/UUaKMULMtJKU=",
+			"path": "github.com/spf13/viper",
+			"revision": "e37b56e207dda4d79b9defe0548e960658ee8b6b",
+			"revisionTime": "2015-11-10T04:22:04Z"
+		}
+	],
+	"rootPath": "github.com/lexty/yandex-dns-cli-manager"
+}
