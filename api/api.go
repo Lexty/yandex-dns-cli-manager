@@ -55,7 +55,7 @@ type Record struct {
 	Priority   interface{} `json:"priority, string"` // Required only for SRV or MX records
 	Subdomain  string      `json:"subdomain"`
 	Weight     int         `json:"weight"`     // Required only for SRV records
-	Port       string      `json:"port"`       // Required only for SRV records
+	Port       int         `json:"port"`       // Required only for SRV records
 	Target     string      `json:"target"`     // Required only for SRV records
 	AdminMail  string      `json:"admin_mail"` // Required only for SOA records
 	Refresh    int         `json:"refresh"`    // Required only for SOA records
@@ -137,8 +137,8 @@ func recordToQueryString(r Record) string {
 	if 0 != r.Weight {
 		query = append(query, "weight="+strconv.Itoa(r.Weight))
 	}
-	if "" != r.Port {
-		query = append(query, "port="+r.Port)
+	if 0 != r.Port {
+		query = append(query, "port="+strconv.Itoa(r.Port))
 	}
 	if "" != r.Target {
 		query = append(query, "target="+r.Target)

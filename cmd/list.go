@@ -40,35 +40,35 @@ import (
 )
 
 const (
-	propAll       string = "*"
-	propId        string = "id"
-	propSubdomain string = "subdomain"
-	propType      string = "type"
-	propContent   string = "content"
-	propPriority  string = "priority"
-	propTTL       string = "ttl"
-	propFQDN      string = "fqdn"
-	propAdminMail string = "admin_mail"
-	propRetry     string = "retry"
-	propRefresh   string = "refresh"
-	propExpire    string = "expire"
-	propMinTTL    string = "minttl"
+	propAll       = "*"
+	propId        = "id"
+	propSubdomain = "subdomain"
+	propType      = "type"
+	propContent   = "content"
+	propPriority  = "priority"
+	propTTL       = "ttl"
+	propFQDN      = "fqdn"
+	propAdminMail = "admin_mail"
+	propRetry     = "retry"
+	propRefresh   = "refresh"
+	propExpire    = "expire"
+	propMinTTL    = "minttl"
 
-	propsDefault string = propId + "," + propSubdomain + "," + propType + "," + propContent + "," + propPriority
+	propsDefault = propId + "," + propSubdomain + "," + propType + "," + propContent + "," + propPriority
 
-	typeAll   string = "*"
-	typeA     string = "A"
-	typeAAAA  string = "AAAA"
-	typeCNAME string = "CNAME"
-	typeMX    string = "MX"
-	typeNS    string = "NS"
-	typeSOA   string = "SOA"
-	typeTXT   string = "TXT"
-	typeSRV   string = "SRV"
+	typeAll   = "*"
+	typeA     = "A"
+	typeAAAA  = "AAAA"
+	typeCNAME = "CNAME"
+	typeMX    = "MX"
+	typeNS    = "NS"
+	typeSOA   = "SOA"
+	typeTXT   = "TXT"
+	typeSRV   = "SRV"
 
-	formatList  string = "list"
-	formatTable string = "table"
-	formatJson  string = "json"
+	formatList  = "list"
+	formatTable = "table"
+	formatJson  = "json"
 )
 
 var props map[string]string
@@ -108,7 +108,8 @@ var listCmd = &cobra.Command{
 }
 
 func throwError(e error) {
-	log.Printf("Error: %s", e.Error())
+	panic(e)
+	log.Fatalf("Error: %s", e.Error())
 	os.Exit(-1)
 }
 
