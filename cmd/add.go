@@ -37,18 +37,6 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add a new DNS record",
 	Run: func(cmd *cobra.Command, args []string) {
-		rec := api.Record{}
-
-		rec.RecordType = viper.GetString("type")
-		rec.AdminMail = viper.GetString("admin-mail")
-		rec.Content = viper.GetString("content")
-		rec.Priority = viper.GetString("priority")
-		rec.Weight = viper.GetInt("weight")
-		rec.Port = viper.GetInt("port")
-		rec.Target = viper.GetString("target")
-		rec.Subdomain = viper.GetString("subdomain")
-		rec.TTL = viper.GetInt("ttl")
-
 		resp, err := api.AddRecord(&rec, viper.GetString("domain"), viper.GetString("admin-token"))
 
 		if err != nil {
@@ -60,7 +48,7 @@ var addCmd = &cobra.Command{
 			fmt.Print(resp.Json)
 		case formatList:
 			setProps()
-			fmt.Printf("Record successfully created\n\n")
+			fmt.Print("Record successfully created\n\n")
 			printList(filterRecords([]api.Record{resp.Record}, []string{"*"}), strings.Join([]string{propId, propType, propContent, propSubdomain, propPriority, propTTL, propFQDN}, ","))
 		default:
 			throwError(errors.New(fmt.Sprintf(`Unknown output format "%s".`, viper.GetString("format"))))
@@ -75,30 +63,13 @@ func init() {
 	viper.BindPFlag("format", addCmd.Flags().Lookup("format"))
 	viper.SetDefault("format", formatList)
 
-	addCmd.Flags().StringP("type", "t", "", fmt.Sprintf("type of record (available: %s)", strings.Join([]string{typeA, typeAAAA, typeCNAME, typeSRV, typeTXT, typeSOA, typeMX, typeNS}, ", ")))
-	viper.BindPFlag("type", addCmd.Flags().Lookup("type"))
-
-	addCmd.Flags().StringP("admin-mail", "m", "", "email-address of the domain's administrator")
-	viper.BindPFlag("admin-mail", addCmd.Flags().Lookup("admin-mail"))
-
-	addCmd.Flags().StringP("content", "c", "", "content of the DNS record")
-	viper.BindPFlag("content", addCmd.Flags().Lookup("content"))
-
-	addCmd.Flags().StringP("priority", "p", "", "riority of the DNS record")
-	viper.BindPFlag("priority", addCmd.Flags().Lookup("priority"))
-
-	addCmd.Flags().IntP("weight", "w", 0, "weight of the SRV-record relative to other SRV-records for the same domain with the same priority")
-	viper.BindPFlag("weight", addCmd.Flags().Lookup("weight"))
-
-	addCmd.Flags().StringP("port", "P", "", "TCP or UDP port of the host that is hosting the service")
-	viper.BindPFlag("port", addCmd.Flags().Lookup("port"))
-
-	addCmd.Flags().StringP("target", "T", "", "the canonical name of the host providing the service")
-	viper.BindPFlag("target", addCmd.Flags().Lookup("target"))
-
-	addCmd.Flags().StringP("subdomain", "s", "", "Name of the subdomain")
-	viper.BindPFlag("subdomain", addCmd.Flags().Lookup("subdomain"))
-
-	addCmd.Flags().IntP("ttl", "l", 0, "the lifetime of the DNS record in seconds")
-	viper.BindPFlag("ttl", addCmd.Flags().Lookup("ttl"))
+	addCmd.Flags().StringVarP(&rec.RecordType, "type", "t", "", fmt.Sprintf("type of record (available: %s)", strings.Join([]string{typeA, typeAAAA, typeCNAME, typeSRV, typeTXT, typeSOA, typeMX, typeNS}, ", ")))
+	addCmd.Flags().StringVarP(&rec.AdminMail, "admin-mail", "m", "", "email-address of the domain's administrator")
+	addCmd.Flags().StringVarP(&rec.Content, "content", "c", "", "content of the DNS record")
+	//addCmd.Flags().StringVarP(rec.Priority.(*string), "priority", "p", "", "priority of the DNS record")
+	addCmd.Flags().IntVarP(&rec.Weight, "weight", "w", 0, "weight of the SRV-record relative to other SRV-records for the same domain with the same priority")
+	addCmd.Flags().IntVarP(&rec.Port, "port", "P", 0, "TCP or UDP port of the host that is hosting the service")
+	addCmd.Flags().StringVarP(&rec.Target, "target", "T", "", "the canonical name of the host providing the service")
+	addCmd.Flags().StringVarP(&rec.Subdomain, "subdomain", "s", "", "Name of the subdomain")
+	addCmd.Flags().IntVarP(&rec.TTL, "ttl", "l", 0, "the lifetime of the DNS record in seconds")
 }

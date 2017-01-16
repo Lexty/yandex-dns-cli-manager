@@ -30,12 +30,14 @@ import (
 	"github.com/spf13/viper"
 )
 
+var id int
+
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Delete the DNS record by ID",
 	Run: func(cmd *cobra.Command, args []string) {
-		resp, err := api.DeleteRecordById(viper.GetInt("id"), viper.GetString("domain"), viper.GetString("admin-token"))
+		resp, err := api.DeleteRecordById(id, viper.GetString("domain"), viper.GetString("admin-token"))
 
 		if err != nil {
 			throwError(err)
@@ -45,7 +47,7 @@ var deleteCmd = &cobra.Command{
 		case formatJson:
 			fmt.Print(resp.Json)
 		case formatList:
-			fmt.Printf("Record successfully deleted\n\n")
+			fmt.Print("Record successfully deleted\n\n")
 		default:
 			throwError(errors.New(fmt.Sprintf(`Unknown output format "%s".`, viper.GetString("format"))))
 		}
@@ -59,6 +61,5 @@ func init() {
 	viper.BindPFlag("format", deleteCmd.Flags().Lookup("format"))
 	viper.SetDefault("format", formatList)
 
-	deleteCmd.Flags().IntP("id", "i", 0, "ID of the record")
-	viper.BindPFlag("id", deleteCmd.Flags().Lookup("id"))
+	deleteCmd.Flags().IntVarP(&id, "id", "i", 0, "ID of the record")
 }

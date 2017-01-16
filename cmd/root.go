@@ -24,6 +24,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/lexty/yandex-dns-cli-manager/api"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -33,9 +34,8 @@ const (
 	cfgFileType string = "json"
 )
 
+var rec api.Record
 var cfgFile string
-var AdminToken string
-var Domain string
 
 // This represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{

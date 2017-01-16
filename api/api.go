@@ -131,7 +131,7 @@ func recordToQueryString(r Record) string {
 	if "" != r.AdminMail {
 		query = append(query, "admin_mail="+r.AdminMail)
 	}
-	if "" != r.Priority.(string) {
+	if r.Priority != nil && "" != r.Priority.(string) {
 		query = append(query, "priority="+r.Priority.(string))
 	}
 	if 0 != r.Weight {

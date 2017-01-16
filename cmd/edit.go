@@ -36,23 +36,6 @@ var editCmd = &cobra.Command{
 	Use:   "edit",
 	Short: "Edit DNS record",
 	Run: func(cmd *cobra.Command, args []string) {
-		rec := api.Record{}
-
-		rec.RecordId = viper.GetInt("id")
-		rec.RecordType = viper.GetString("type")
-		rec.AdminMail = viper.GetString("admin-mail")
-		rec.Content = viper.GetString("content")
-		rec.Priority = viper.GetString("priority")
-		rec.Weight = viper.GetInt("weight")
-		rec.Port = viper.GetInt("port")
-		rec.Target = viper.GetString("target")
-		rec.Subdomain = viper.GetString("subdomain")
-		rec.TTL = viper.GetInt("ttl")
-		rec.Refresh = viper.GetInt("refresh")
-		rec.Retry = viper.GetInt("retry")
-		rec.Expire = viper.GetInt("expire")
-		rec.NegCache = viper.GetInt("neg-cache")
-
 		resp, err := api.EditRecord(&rec, viper.GetString("domain"), viper.GetString("admin-token"))
 
 		if err != nil {
@@ -64,7 +47,7 @@ var editCmd = &cobra.Command{
 			fmt.Print(resp.Json)
 		case formatList:
 			setProps()
-			fmt.Printf("Record successfully changed\n\n")
+			fmt.Print("Record successfully changed\n\n")
 			printList(filterRecords([]api.Record{resp.Record}, []string{"*"}), strings.Join([]string{propId, propType, propContent, propSubdomain, propPriority, propTTL, propFQDN}, ","))
 		default:
 			throwError(errors.New(fmt.Sprintf(`Unknown output format "%s".`, viper.GetString("format"))))
@@ -79,43 +62,18 @@ func init() {
 	viper.BindPFlag("format", editCmd.Flags().Lookup("format"))
 	viper.SetDefault("format", formatList)
 
-	editCmd.Flags().IntP("id", "i", 0, "ID of the record")
-	viper.BindPFlag("id", editCmd.Flags().Lookup("id"))
-
-	editCmd.Flags().StringP("admin-mail", "m", "", "email-address of the domain's administrator")
-	viper.BindPFlag("admin-mail", editCmd.Flags().Lookup("admin-mail"))
-
-	editCmd.Flags().StringP("content", "c", "", "content of the DNS record")
-	viper.BindPFlag("content", editCmd.Flags().Lookup("content"))
-
-	editCmd.Flags().StringP("priority", "p", "", "priority of the DNS record")
-	viper.BindPFlag("priority", editCmd.Flags().Lookup("priority"))
-
-	editCmd.Flags().IntP("weight", "w", 0, "weight of the SRV-record relative to other SRV-records for the same domain with the same priority")
-	viper.BindPFlag("weight", editCmd.Flags().Lookup("weight"))
-
-	editCmd.Flags().StringP("port", "P", "", "TCP or UDP port of the host that is hosting the service")
-	viper.BindPFlag("port", editCmd.Flags().Lookup("port"))
-
-	editCmd.Flags().StringP("target", "T", "", "the canonical name of the host providing the service")
-	viper.BindPFlag("target", editCmd.Flags().Lookup("target"))
-
-	editCmd.Flags().StringP("subdomain", "s", "", "name of the subdomain")
-	viper.BindPFlag("subdomain", editCmd.Flags().Lookup("subdomain"))
-
-	editCmd.Flags().IntP("ttl", "l", 0, "the lifetime of the DNS record in seconds")
-	viper.BindPFlag("ttl", editCmd.Flags().Lookup("ttl"))
-
-	editCmd.Flags().IntP("refresh", "r", 0, "time between updates")
-	viper.BindPFlag("refresh", editCmd.Flags().Lookup("refresh"))
-
-	editCmd.Flags().IntP("retry", "R", 0, "the time between attempts to obtain records")
-	viper.BindPFlag("retry", editCmd.Flags().Lookup("retry"))
-
-	editCmd.Flags().IntP("expire", "e", 0, "time limit")
-	viper.BindPFlag("expire", editCmd.Flags().Lookup("expire"))
-
-	editCmd.Flags().IntP("neg-cache", "n", 0, "caching time")
-	viper.BindPFlag("neg-cache", editCmd.Flags().Lookup("neg-cache"))
+	editCmd.Flags().IntVarP(&rec.RecordId, "id", "i", 0, "ID of the record")
+	editCmd.Flags().StringVarP(&rec.AdminMail, "admin-mail", "m", "", "email-address of the domain's administrator")
+	editCmd.Flags().StringVarP(&rec.Content, "content", "c", "", "content of the DNS record")
+	//editCmd.Flags().StringVarP(rec.Priority.(*string), "priority", "p", "", "priority of the DNS record")
+	editCmd.Flags().IntVarP(&rec.Weight, "weight", "w", 0, "weight of the SRV-record relative to other SRV-records for the same domain with the same priority")
+	editCmd.Flags().IntVarP(&rec.Port, "port", "P", 0, "TCP or UDP port of the host that is hosting the service")
+	editCmd.Flags().StringVarP(&rec.Target, "target", "T", "", "the canonical name of the host providing the service")
+	editCmd.Flags().StringVarP(&rec.Subdomain, "subdomain", "s", "", "Name of the subdomain")
+	editCmd.Flags().IntVarP(&rec.TTL, "ttl", "l", 0, "the lifetime of the DNS record in seconds")
+	editCmd.Flags().IntVarP(&rec.Refresh, "refresh", "r", 0, "time between updates")
+	editCmd.Flags().IntVarP(&rec.Retry, "retry", "R", 0, "the time between attempts to obtain records")
+	editCmd.Flags().IntVarP(&rec.Expire, "expire", "e", 0, "time limit")
+	editCmd.Flags().IntVarP(&rec.NegCache, "neg-cache", "n", 0, "caching time")
 
 }
