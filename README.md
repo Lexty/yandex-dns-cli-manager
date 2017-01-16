@@ -13,7 +13,7 @@
 Yandex DNS CLI manager allows you to change the DNS settings of your domain on pdd.yandex.ru
 
 Usage:
-  yandexdns [command]
+  yandex-dns-cli-manager [command]
 
 Available Commands:
   add         Add a new DNS record
@@ -29,7 +29,7 @@ Flags:
       --config="": config file (default is $HOME/.yandexdns.json)
   -d, --domain="": domain name
 
-Use "yandexdns [command] --help" for more information about a command.
+Use "yandex-dns-cli-manager [command] --help" for more information about a command.
 ```
 
 ### License
