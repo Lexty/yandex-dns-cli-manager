@@ -1,6 +1,6 @@
 # Yandex DNS CLI manager
 
-### Get started
+### Getting started
 
     go get github.com/lexty/yandex-dns-cli-manager
     yandex-dns-cli-manager get-token
